@@ -7,6 +7,7 @@ public class DieScript : MonoBehaviour
         if (collision.CompareTag("player"))
         {
             Player.Instance.life -= Player.Instance.life;
+            Player.Instance.life_bar.UpdateHearts();
         }
     }
 }

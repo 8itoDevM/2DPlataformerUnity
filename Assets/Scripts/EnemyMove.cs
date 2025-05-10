@@ -16,6 +16,8 @@ public class EnemyMove : MonoBehaviour
 
     public int damage = 0;
 
+    private states lastChaseState;
+
     public enum states { Right, Left, Still }
     int current_state_int = 0;
     public states current_state;
@@ -43,32 +45,43 @@ public class EnemyMove : MonoBehaviour
     {
         DetectPlayerRay();
 
-        if (followPlayer && !is_edging)
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+        bool withinAttackRange = distanceToPlayer <= atack_range;
+
+        if (followPlayer && !is_edging && !withinAttackRange)
         {
-            Patrol(direction, current_state);
-        } else if(followPlayer && is_edging)
-        {
-            Patrol(direction, states.Still);
-        } else if (!is_edging)
-        {
-            Patrol(direction, current_state);
+            Patrol(direction, current_state, true);
         }
-        
+        else if (followPlayer && is_edging)
+        {
+            Patrol(direction, states.Still, false);
+        }
+        else if (!is_edging && !withinAttackRange)
+        {
+            Patrol(direction, current_state, true);
+        }
+        else
+        {
+            Patrol(direction, states.Still, false);
+        }
     }
 
-    void Patrol(Vector3 dir, states state)
+
+
+    void Patrol(Vector3 dir, states state, bool shouldMove = true)
     {
         switch (state)
         {
             case states.Left:
                 Turn();
-                transform.position += direction * speed * Time.deltaTime;
+                if (shouldMove) transform.position += direction * speed * Time.deltaTime;
                 animator.SetInteger("anim", 2);
                 Turn(true);
                 break;
             case states.Right:
                 Turn();
-                transform.position += direction * speed * Time.deltaTime;
+                if (shouldMove) transform.position += direction * speed * Time.deltaTime;
                 animator.SetInteger("anim", 3);
                 Turn(false);
                 break;
@@ -77,6 +90,7 @@ public class EnemyMove : MonoBehaviour
                 break;
         }
     }
+
 
     void Turn(bool faceLeft)
     {
@@ -135,17 +149,27 @@ public class EnemyMove : MonoBehaviour
             if (hit.collider == null)
             {
                 followPlayer = true;
-                StopCoroutine(ChangeStateRepeat());
 
-                if (dirToPlayer.x < 0)
+                if (distance > atack_range)
                 {
-                    current_state = states.Left;
-                    direction = Vector3.left;
+                    // Update direction only if not attacking
+                    if (dirToPlayer.x < 0)
+                    {
+                        current_state = states.Left;
+                        direction = Vector3.left;
+                        lastChaseState = states.Left;
+                    }
+                    else
+                    {
+                        current_state = states.Right;
+                        direction = Vector3.right;
+                        lastChaseState = states.Right;
+                    }
                 }
                 else
                 {
-                    current_state = states.Right;
-                    direction = Vector3.right;
+                    // Lock direction to last chase direction
+                    current_state = lastChaseState;
                 }
             }
             else
@@ -158,13 +182,13 @@ public class EnemyMove : MonoBehaviour
             followPlayer = false;
         }
 
-        // Attack the player if in range and not already attacking
+        // Attack if close enough and not already attacking
         if (distance <= atack_range && !isAttacking)
         {
             StartCoroutine(AttackPlayerCoroutine());
         }
     }
-    
+
     // Coroutine to handle continuous attacks
     IEnumerator AttackPlayerCoroutine()
     {
@@ -174,6 +198,8 @@ public class EnemyMove : MonoBehaviour
         {
             if (Player.Instance != null && Player.Instance.life > 0)
             {
+                Patrol(direction, states.Still);
+
                 animator.SetTrigger("attack");
 
                 Player.Instance.life -= damage;

@@ -1,6 +1,10 @@
+using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -33,6 +37,8 @@ public class Player : MonoBehaviour
     public int life = 5;
     public LifeBarScript life_bar;
 
+    public Text restart;
+
     #region Singleton
 
     public static Player Instance;
@@ -61,6 +67,8 @@ public class Player : MonoBehaviour
         turn_script = GetComponentsInChildren<TurnWeapon>();
         turn_sprite_script = GetComponentInChildren<TurnSprite>();
 
+        restart.enabled = false;
+
         rb.linearVelocity = Vector2.zero;
     }
 
@@ -84,8 +92,18 @@ public class Player : MonoBehaviour
         else
         {
             move_input = new Vector2(0, 0);
+
+            StartCoroutine(WaitDeath());
         }
     }
+
+    private IEnumerator WaitDeath()
+    {
+        yield return new WaitForSeconds(1.5f);
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
 
     public void Jump()
     {
@@ -193,6 +211,7 @@ public class Player : MonoBehaviour
         else
         {
             rb.linearVelocityX = 0;
+            restart.enabled = true;
         }
             
 

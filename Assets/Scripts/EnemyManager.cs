@@ -1,8 +1,6 @@
 using UnityEngine;
 using UnityEngine.Windows;
 
-using UnityEngine;
-
 public class EnemyManager : MonoBehaviour
 {
     public int life = 0;

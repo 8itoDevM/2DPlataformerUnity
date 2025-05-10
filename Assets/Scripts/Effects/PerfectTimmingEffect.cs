@@ -15,7 +15,7 @@ public class PerfectTimmingEffect : GetAttacked
         enemy_manager.life -= 1;
         enemy_manager.Die();
 
-        Player.Instance.jump_force += 7;
+        Player.Instance.jump_force += 5;
         Player.Instance.speed += 1;
         Player.Instance.grounded = true;
         if (enemy_manager.alive)

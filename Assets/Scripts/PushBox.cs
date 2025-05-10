@@ -29,6 +29,8 @@ public class PushBox : MonoBehaviour
         {
             normal_speed = Player.Instance.speed;
             Player.Instance.speed = Player.Instance.speed / 1.7f;
+            gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+            Player.Instance.animator.SetBool("running", true);
             being_pushed = true;
         }
     }
@@ -39,6 +41,8 @@ public class PushBox : MonoBehaviour
         {
             Player.Instance.speed = normal_speed;
             being_pushed = false;
+            
+            gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         }
     }
 }
