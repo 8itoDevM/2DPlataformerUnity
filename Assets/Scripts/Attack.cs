@@ -43,7 +43,7 @@ public class Attack : MonoBehaviour
         yield return new WaitForSeconds(cooldown);
         col.enabled = false;
         canAtack = true;
-    }
+    }   
 
     private IEnumerator CooldownAnim()
     {

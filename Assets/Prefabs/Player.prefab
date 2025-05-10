@@ -37,6 +37,7 @@ Transform:
   - {fileID: 8797828564126167698}
   - {fileID: 3492794260024770408}
   - {fileID: 8454939205955283804}
+  - {fileID: 7773202656116285251}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &4159892816108906203
@@ -163,12 +164,14 @@ MonoBehaviour:
   grounded: 0
   atk_script: {fileID: 0}
   atk_timming_script: {fileID: 0}
+  atacking_timing: 0
   can_timming_atk: 0
   turn_script:
   - {fileID: 0}
   turn_sprite_script: {fileID: 0}
   animator: {fileID: 0}
   life: 5
+  life_bar: {fileID: 0}
 --- !u!114 &7659943966595966853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,7 +202,7 @@ GameObject:
   - component: {fileID: 4429315783625994467}
   - component: {fileID: 4028459197847770801}
   - component: {fileID: 748510687453793990}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Taco
   m_TagString: taco
   m_Icon: {fileID: 0}
@@ -362,7 +365,7 @@ GameObject:
   - component: {fileID: 6285288828920191611}
   - component: {fileID: 7036174480682637258}
   - component: {fileID: 3154353437246866364}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: TacoTimming
   m_TagString: tacotimming
   m_Icon: {fileID: 0}
@@ -473,7 +476,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.5298456}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -483,7 +486,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 2.0596912}
   m_EdgeRadius: 0
 --- !u!114 &3154353437246866364
 MonoBehaviour:
@@ -498,8 +501,99 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   col: {fileID: 0}
-  cooldown: 0.1
-  cooldown_anim: 0
+  cooldown: 1
+  cooldown_anim: 0.1
+--- !u!1 &4661590976051336251
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7773202656116285251}
+  - component: {fileID: 7419343392878024808}
+  - component: {fileID: 3700930658791415036}
+  m_Layer: 2
+  m_Name: Feet
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7773202656116285251
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4661590976051336251}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.756, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5958957340712273637}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &7419343392878024808
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4661590976051336251}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.69, y: 0.06}
+  m_EdgeRadius: 0
+--- !u!114 &3700930658791415036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4661590976051336251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f483c1e5138509143a9e89ad420e3eca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6220233574869719037
 GameObject:
   m_ObjectHideFlags: 0

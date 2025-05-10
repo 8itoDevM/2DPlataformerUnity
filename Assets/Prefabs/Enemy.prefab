@@ -238,6 +238,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   current_state: 0
+  animator: {fileID: 0}
 --- !u!114 &5909445202280478615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,7 +281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3b453749a4622749a409b7194da1825, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  life: 27
+  life: 5
   alive: 1
   fall_multiplier: 3
   low_jump_mult: 5

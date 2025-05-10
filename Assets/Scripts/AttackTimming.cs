@@ -21,7 +21,7 @@ public class AttackTimming : MonoBehaviour
         {
             return;
         }
-        //Player.Instance.animator.SetTrigger("AtkTimming");
+        Player.Instance.animator.SetTrigger("atktime");
         StartCoroutine(CooldownAnim());
         Debug.Log("Ataque timing");
         StartCoroutine(CooldownAtk());

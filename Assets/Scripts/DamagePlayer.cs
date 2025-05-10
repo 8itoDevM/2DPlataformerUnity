@@ -11,6 +11,7 @@ public class DamagePlayer : MonoBehaviour
         {
             Player.Instance.life -= ammount;
             Player.Instance.life_bar.UpdateHearts();
+            Player.Instance.animator.SetTrigger("dead");
         }
     }
 }

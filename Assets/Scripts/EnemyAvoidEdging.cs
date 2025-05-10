@@ -19,7 +19,12 @@ public class EnemyAvoidEdging : MonoBehaviour
     {
         if (!IsGroundAhead())
         {
+            enemy_move.is_edging = true;
             enemy_move.EdgingDetected();
+        }
+        else
+        {
+            enemy_move.is_edging = false;
         }
     }
 
