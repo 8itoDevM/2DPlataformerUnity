@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
         lastTgManager = GetComponent<LastTgManager>();
     }
 
+    // Load a new scene and teleports you near to the correct trigger
     public void ChangeSceneAndTeleport(string go_to)
     {
         SceneManager.LoadScene(go_to);

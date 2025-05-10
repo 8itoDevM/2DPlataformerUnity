@@ -30,9 +30,10 @@ public class Attack : MonoBehaviour
         {
             Player.Instance.rb.linearVelocity = new Vector2(Player.Instance.move_input.x / 1.5f, 0);
         }
-            
-        StartCoroutine(CooldownAnim());
         
+
+        StartCoroutine(CooldownAnim());
+
         StartCoroutine(CooldownAtk());
     }
 
@@ -46,6 +47,7 @@ public class Attack : MonoBehaviour
 
     private IEnumerator CooldownAnim()
     {
+
         yield return new WaitForSeconds(cooldown_anim);
         col.enabled = true;
     }

@@ -10,6 +10,10 @@ public class LastTgManager : MonoBehaviour
 
     public Vector3? pendingTeleportPosition; 
 
+
+    // Script meant to make scene transitions make sense
+    // Going in a scene to your left, makes you appear on the right
+    // going back, makes you appear on the left again
     public void SetTrigger(Collider2D collision, string id)
     {
         lastTriggerPosition = collision.transform.position;

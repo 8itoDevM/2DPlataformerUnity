@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.Windows;
 
+using UnityEngine;
+
 public class EnemyManager : MonoBehaviour
 {
     public int life = 0;
@@ -9,7 +11,6 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] float low_jump_mult;
 
     Rigidbody2D rb;
-
     EnemyEffect enemy_effect;
     EnemyAvoidEdging enemy_edging;
     EnemyMove enemy_move;
@@ -19,8 +20,8 @@ public class EnemyManager : MonoBehaviour
     {
         enemy_move = GetComponent<EnemyMove>();
         enemy_edging = GetComponent<EnemyAvoidEdging>();
-        enemy_effect = GetComponent<EnemyEffect>();   
-        enemy_atack = GetComponent<EnemyAtack>();   
+        enemy_effect = GetComponent<EnemyEffect>();
+        enemy_atack = GetComponent<EnemyAtack>();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -28,24 +29,37 @@ public class EnemyManager : MonoBehaviour
     {
         if (rb.linearVelocity.y < 0)
         {
-            rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (fall_multiplier - 1) * Time.fixedDeltaTime;
+            FallFaster(fall_multiplier);
         }
-        else if (rb.linearVelocityY > 0)
+        else if (rb.linearVelocity.y > 0)
         {
-            rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (low_jump_mult - 1) * Time.fixedDeltaTime;
+            FallFaster(low_jump_mult);
         }
     }
 
-    public void FuckingDie()
+    public void GetHurt()
     {
-        if(alive && life <= 0)
+        enemy_move.animator.SetTrigger("hurt");
+        life--;
+        Die();
+    }
+
+    public void FallFaster(float multi)
+    {
+        rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (multi - 1) * Time.fixedDeltaTime;
+    }
+
+    public void Die()
+    {
+        if (alive && life <= 0)
         {
-            CrippleMaker();
+            StopWalking();
+            enemy_move.animator.SetTrigger("dead");
             alive = false;
         }
     }
 
-    public void CrippleMaker()
+    public void StopWalking()
     {
         Destroy(enemy_move);
         Destroy(enemy_edging);

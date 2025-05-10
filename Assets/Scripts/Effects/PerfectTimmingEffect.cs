@@ -13,7 +13,7 @@ public class PerfectTimmingEffect : GetAttacked
         enemy_manager = transform.parent.GetComponent<EnemyManager>();
 
         enemy_manager.life -= 1;
-        enemy_manager.FuckingDie();
+        enemy_manager.Die();
 
         Player.Instance.jump_force += 7;
         Player.Instance.speed += 1;

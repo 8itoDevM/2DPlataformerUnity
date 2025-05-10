@@ -11,8 +11,7 @@ public class EnemyEffect : GetAttacked
         enemy_manager = GetComponent<EnemyManager>();
         base.Effect();
         rb.AddForce(new Vector2(Mathf.Sign(rb.position.x - Player.Instance.transform.position.x), 2.3f) * 1.5f, ForceMode2D.Impulse);
-        enemy_manager.life -= 1;
-        enemy_manager.FuckingDie();
+        enemy_manager.GetHurt();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

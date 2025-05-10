@@ -34,6 +34,7 @@ public class LifeBarScript : MonoBehaviour
 
     public void UpdateHearts()
     {
+        // Clears all the hearts and add them again according to the player's life
         ClearHearts();
         AddHearts();
     }
